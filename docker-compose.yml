@@ -33,10 +33,10 @@ services:
       - ./wireguard:/etc/wireguard
     
     ports:
-      # Web GUI (открой http://localhost:3000)
-      - "3000:3000"
-      # HTTPS Web GUI (https://localhost:3001)
-      - "3001:3001"
+      # Web GUI (открой http://localhost:3333)
+      - "3333:3000"
+      # HTTPS Web GUI (https://localhost:3334)
+      - "3334:3001"
     
     # Устройство для VPN туннеля
     devices:

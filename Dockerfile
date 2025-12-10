@@ -1,5 +1,5 @@
-# Легкий Alpine образ с XFCE рабочим столом в браузере
-FROM lscr.io/linuxserver/webtop:alpine-xfce
+# Легкий Alpine образ с рабочим столом в браузере
+FROM linuxserver/webtop:latest
 
 LABEL maintainer="Vladimir Sadikov"
 LABEL description="Lightweight secure desktop with VPN, Telegram and WhatsApp"
