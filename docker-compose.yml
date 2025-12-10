@@ -1,0 +1,48 @@
+services:
+  secure-desktop:
+    build: .
+    image: secure-desktop:latest
+    container_name: secure-desktop
+    
+    # Права для VPN (управление сетевыми интерфейсами)
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+    
+    security_opt:
+      - seccomp:unconfined
+    
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Berlin
+      # Разрешение экрана (можно менять)
+      - RESOLUTION=1920x1080
+    
+    volumes:
+      # Сохранение настроек (Telegram, Chromium профили)
+      - ./config:/config
+      
+      # === ФАЙЛЫ МЕССЕНДЖЕРОВ (легкий доступ с хоста) ===
+      # Telegram Downloads (фото, видео, документы)
+      - ./downloads/telegram:/config/.local/share/TelegramDesktop/tdata/user_data/media_cache
+      # WhatsApp Downloads (через Chromium)
+      - ./downloads/whatsapp:/config/Downloads
+      
+      # Конфиг WireGuard VPN (положи сюда wg0.conf)
+      - ./wireguard:/etc/wireguard
+    
+    ports:
+      # Web GUI (открой http://localhost:3000)
+      - "3000:3000"
+      # HTTPS Web GUI (https://localhost:3001)
+      - "3001:3001"
+    
+    # Устройство для VPN туннеля
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1
+    
+    restart: unless-stopped
