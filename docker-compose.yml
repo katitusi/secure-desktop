@@ -24,9 +24,9 @@ services:
       - ./config:/config
       
       # === ФАЙЛЫ МЕССЕНДЖЕРОВ (легкий доступ с хоста) ===
-      # Telegram Downloads (фото, видео, документы)
-      - ./downloads/telegram:/config/.local/share/TelegramDesktop/tdata/user_data/media_cache
-      # WhatsApp Downloads (через Chromium)
+      # Telegram данные (сессия, чаты, медиа)
+      - ./downloads/telegram:/config/.local/share/TelegramDesktop
+      # WhatsApp Downloads (через Firefox)
       - ./downloads/whatsapp:/config/Downloads
       
       # Конфиг WireGuard VPN (положи сюда wg0.conf)
