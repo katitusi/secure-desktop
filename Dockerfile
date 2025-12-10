@@ -7,12 +7,12 @@ LABEL description="Lightweight secure desktop with VPN, Telegram and WhatsApp"
 # Устанавливаем необходимые пакеты
 # wireguard-tools - VPN
 # telegram-desktop - официальный клиент Telegram
-# chromium - для WhatsApp Web
+# firefox - стабильный браузер для WhatsApp Web
 # font-noto* - шрифты с поддержкой эмодзи и кириллицы
 RUN apk add --no-cache \
     wireguard-tools \
     telegram-desktop \
-    chromium \
+    firefox \
     font-noto \
     font-noto-emoji \
     font-noto-cjk
@@ -29,8 +29,8 @@ RUN mkdir -p /custom-cont-init.d && \
     echo 'Type=Application' >> /custom-cont-init.d/10-create-shortcuts && \
     echo 'Name=WhatsApp' >> /custom-cont-init.d/10-create-shortcuts && \
     echo 'Comment=WhatsApp Web' >> /custom-cont-init.d/10-create-shortcuts && \
-    echo 'Exec=chromium --app=https://web.whatsapp.com --no-sandbox' >> /custom-cont-init.d/10-create-shortcuts && \
-    echo 'Icon=chromium' >> /custom-cont-init.d/10-create-shortcuts && \
+    echo 'Exec=firefox --new-window https://web.whatsapp.com' >> /custom-cont-init.d/10-create-shortcuts && \
+    echo 'Icon=firefox' >> /custom-cont-init.d/10-create-shortcuts && \
     echo 'Terminal=false' >> /custom-cont-init.d/10-create-shortcuts && \
     echo 'StartupNotify=false' >> /custom-cont-init.d/10-create-shortcuts && \
     echo 'EOF' >> /custom-cont-init.d/10-create-shortcuts && \
